@@ -3,10 +3,12 @@
 
 import argparse
 
+
 def get_args():
     p = argparse.ArgumentParser()
-    p.add_argument("input", help="the path containing source code")   
+    p.add_argument("source", help="the path containing source code")
     p.add_argument("output", help="the path for saving output files")
-    p.add_argument("--color", help="the color scheme to use for syntax highlighting")
+    p.add_argument("--color",
+                   help="the color scheme to use for syntax highlighting")
 
     return p.parse_args()

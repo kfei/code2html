@@ -4,8 +4,13 @@
 import sys
 from args import get_args
 from subprocess import Popen, PIPE
-from os.path import expanduser, isfile
+from os.path import expanduser, isfile, isdir, exists
+from os import makedirs
+from shutil import rmtree
 import glob
+
+from utils import query_yes_no
+
 
 if __name__ == '__main__':
     # Get the arguments passed by user
@@ -29,6 +34,19 @@ if __name__ == '__main__':
     else:
         sys.exit(u'ERROR: The selected color scheme does not exist, aborted.')
 
-    # TODO: Test the inupt/output directories
+    # Test the inupt path
+    if isdir(args.source):
+        pass
+    else:
+        sys.exit(u'ERROR: The source directory does not exist, aborted.')
+
+    # Test the output path
+    if exists(args.output):
+        if query_yes_no(u'The output directory exists, delete it first?'):
+            rmtree(args.output)
+        else:
+            sys.exit(u'Nothing happened.')
+
+    makedirs(args.output)
 
     # TODO: Call Vim to do the conversion
