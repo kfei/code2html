@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import sys
+from subprocess import Popen, PIPE
+from os.path import expanduser, isfile, isdir, exists
+import glob
+from shutil import rmtree
+from os import makedirs
 
 
 def query_yes_no(question, default="yes"):
@@ -33,3 +38,53 @@ def query_yes_no(question, default="yes"):
             return valid[choice]
         else:
             pass
+
+
+def check_vim():
+    """
+    Check whether Vim is available
+    """
+    p1 = Popen(["vim", "--version"], stdout=PIPE)
+    p2 = Popen(["grep", "IMproved"], stdin=p1.stdout, stdout=PIPE)
+    vim_header = p2.communicate()[0].strip('\n')
+    if vim_header:
+        pass  # Vim detected
+    else:
+        sys.exit(u'ERROR: Vim is not yet installed on this system, aborted.')
+
+
+def check_color_scheme(color):
+    """
+    Check whether the selected color scheme exists
+    TODO: Add Windows support
+    """
+    if isfile(expanduser('~') + '/.vim/colors/' + color + '.vim'):
+        pass  # Color scheme exists
+    elif glob.glob('/usr/share/vim/vim*/colors/' + color + '.vim'):
+        pass  # Color scheme exists
+    else:
+        sys.exit(u'ERROR: The selected color scheme does not exist, aborted.')
+
+
+def test_input(source):
+    """
+    Test the inupt path
+    """
+    if isdir(source):
+        pass
+    else:
+        sys.exit(u'ERROR: The source directory does not exist, aborted.')
+
+
+def test_output(output):
+    """
+    Test the output path, create it if not exists.
+    """
+    if exists(output):
+        if query_yes_no(u'The output directory exists,'
+                        u' delete it first?'):
+            rmtree(output)
+        else:
+            sys.exit(u'Nothing happened.')
+
+    makedirs(output)
