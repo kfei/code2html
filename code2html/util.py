@@ -8,6 +8,13 @@ from shutil import rmtree
 from os import makedirs
 
 
+def strip_trailing_slash(string):
+    if string[-1] == '/':  # FIXME: Does this work for Windows?
+        return string[:-1]
+    else:
+        return string
+
+
 def query_yes_no(question, default="yes"):
     """Ask a yes/no question via raw_input() and return their answer.
 
