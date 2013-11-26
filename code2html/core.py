@@ -1,9 +1,24 @@
 # -*- coding: utf-8 -*-
 
+import sys
 import os
 import re
 from shutil import move
-# import subprocess
+import subprocess
+
+from code2html.vim import get_vimrc, vim_command, clean_vimrc
+
+
+vimrc_file = None
+
+
+def fire(in_out, ignore_list, color):
+    """
+    Create Vim configs and then fire up the file traveling.
+    """
+    global vimrc_file
+    vimrc_file = get_vimrc(color)
+    traverse_files(in_out, ignore_list)
 
 
 def traverse_files(in_out, ignore_list):
@@ -26,11 +41,12 @@ def traverse_files(in_out, ignore_list):
             if match:
                 subdir = match.group(2)[1:]  # Avoid the leading slash
                 if subdir:
-                    print('Making directory %s' % o_root + '/' + subdir)
+                    print(u'Making directory %s' %
+                          os.path.join(o_root, subdir))
                     try:
                         os.makedirs(os.path.join(o_root, subdir))
                     except Exception:
-                        print('ERROR')
+                        sys.exit(u'ERROR: Can not create directory, aborted.')
 
             for f in file_list:
                 if subdir:
@@ -38,19 +54,26 @@ def traverse_files(in_out, ignore_list):
                 else:
                     convert(dir_name, f, os.path.join(o_root))
 
+    clean_vimrc(vimrc_file)
 
-def convert(source_path, file_name, output):
+
+def convert(source_path, file_name, output_path):
     """
-    Vim command:
-        for i in *.ext; do vim -c TOhtml -c wqa $i ; done
-        OR
-        for f in *.[ch]; do
-            gvim -f +"syn on" +"run! syntax/2html.vim" +"wq" +"q" $f;
-        done
+    Call Vim to do the convertion.
+
     """
     ori_file = os.path.join(source_path, file_name)
-    print('Converting %s into %s' % (ori_file, output))
+    html_file = os.path.join(source_path, file_name + '.html')
+    out_file = os.path.join(output_path, file_name + '.html')
+
+    global vimrc_file
+
+    print(u'Converting %s into %s' % (ori_file, out_file))
+
+    cmd = vim_command(vimrc_file) + [ori_file]
+
     try:
-        move(ori_file, output)
+        subprocess.call(cmd)
+        move(html_file, out_file)
     except Exception:
-        print('ERROR')
+        sys.exit(u'ERROR: Fail to convert files, aborted.')
