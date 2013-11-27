@@ -8,7 +8,7 @@ from code2html import util
 from code2html import core
 
 
-if __name__ == '__main__':
+def main():
     # Get the arguments passed by user
     args = get_args()
     input = util.strip_trailing_slash(args.input)
@@ -30,3 +30,7 @@ if __name__ == '__main__':
     core.fire(in_out, ignore_list, color)
 
     sys.exit(0)
+
+
+if __name__ == '__main__':
+    main()
