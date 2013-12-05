@@ -19,8 +19,8 @@ Usage
 code2html [-h] [--color COLOR] input output
 
 positional arguments:
-  input          the path containing source code
-  output         the path for saving output files
+  input          path to the source code repository
+  output         path for saving output files
 
 optional arguments:
   -h, --help     show this help message and exit
