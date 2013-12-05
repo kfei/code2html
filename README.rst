@@ -15,13 +15,14 @@ a beautiful syntax highlight (thanks ``Vim``).
 
 Usage
 -----
+::
 
-code2html [-h] [--color COLOR] input output
-
-positional arguments:
-  input          path to the source code repository
-  output         path for saving output files
-
-optional arguments:
-  -h, --help     show this help message and exit
-  --color COLOR  the color scheme to use for syntax highlighting
+    code2html [-h] [--color COLOR] input output
+    
+    positional arguments:
+      input          path to the source code repository
+      output         path for saving output files
+    
+    optional arguments:
+      -h, --help     show this help message and exit
+      --color COLOR  the color scheme to use for syntax highlighting
