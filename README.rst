@@ -8,10 +8,21 @@ Brief
 
 Do you like reading source code on your mobile devices?
 
-``code2html`` is a tool converts source code repository to HTML format files so
-that you can put them into your mobile devices and read it whenever with
-a beautiful syntax highlight (thanks ``Vim``).
+HTML is a light-weight format (unlike PDF or EPUB) that can be easily readed on
+every browser-included mobile device.
 
+``code2html`` is a tool converts source code repository to HTML format files so
+that you can put them into your mobile devices and read it whenever and
+wherever with a beautiful syntax highlight (thanks ``Vim``).
+
+Get rid of those social networking applications, start to **enjoy code reading**.
+
+Requirements
+------------
+
+By taking advantages of the magic ``TOhtml`` function from ``Vim``,
+``code2html`` requires you have ``Vim`` installed, also if you specify
+a non-default color scheme to use, it must be available on your system as well.
 
 Usage
 -----
