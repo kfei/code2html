@@ -7,21 +7,22 @@ from shutil import move
 import subprocess
 
 from code2html.vim import get_vimrc, vim_command, clean_vimrc
+from code2html.filter import get_filter
 
 
 vimrc_file = None
 
 
-def fire(in_out, ignore_list, color):
+def fire(in_out, color):
     """
     Create Vim configs and then fire up the file traveling.
     """
     global vimrc_file
     vimrc_file = get_vimrc(color)
-    traverse_files(in_out, ignore_list)
+    traverse_files(in_out)
 
 
-def traverse_files(in_out, ignore_list):
+def traverse_files(in_out):
     """
     Traverse the source directory, and send each file to
     convert. Without lost of the directory hierachy.
@@ -29,8 +30,10 @@ def traverse_files(in_out, ignore_list):
     s_root = in_out[0]  # The source directory
     o_root = in_out[1]  # The output directory
 
+    filter = get_filter()  # Apply the ignore list
+
     for dir_name, sub_dir_name, file_list in os.walk(s_root):
-        for ig in ignore_list:
+        for ig in filter:
             match = re.search(ig, dir_name, re.IGNORECASE)
             if match:
                 break

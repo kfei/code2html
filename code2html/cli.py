@@ -21,13 +21,9 @@ def main():
     util.test_input(input)
     util.test_output(output)
 
-    # List of ignore pattern
-    # TODO: Make this configurable
-    ignore_list = ['.git', '.svn']
-
     # Call Vim to do the conversion
     in_out = (input, output)
-    core.fire(in_out, ignore_list, color)
+    core.fire(in_out, color)
 
     sys.exit(0)
 
