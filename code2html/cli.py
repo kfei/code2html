@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
+from os.path import normpath
 
 from code2html.args import get_args
 from code2html import util
@@ -11,8 +12,8 @@ from code2html import core
 def main():
     # Get the arguments passed by user
     args = get_args()
-    input = util.strip_trailing_slash(args.input)
-    output = util.strip_trailing_slash(args.output)
+    input = normpath(args.input)
+    output = normpath(args.output)
     color = args.color
 
     # Preparation

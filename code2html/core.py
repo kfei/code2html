@@ -5,9 +5,11 @@ import os
 import re
 from shutil import move
 import subprocess
+from fnmatch import fnmatch
 
 from code2html.vim import get_vimrc, vim_command, clean_vimrc
 from code2html.filter import get_filter
+from code2html.util import get_subdir_name
 
 
 vimrc_file = None
@@ -27,29 +29,27 @@ def traverse_files(in_out):
     Traverse the source directory, and send each file to
     convert. Without lost of the directory hierachy.
     """
-    s_root = in_out[0]  # The source directory
-    o_root = in_out[1]  # The output directory
+    s_root = in_out[0]
+    o_root = in_out[1]
 
     filter = get_filter()  # Apply the ignore list
 
     for dir_name, sub_dir_name, file_list in os.walk(s_root):
+        # Ignore some sub directories, e.g. source code control
         for ig in filter:
             match = re.search(ig, dir_name, re.IGNORECASE)
             if match:
                 break
         else:
-            # FIXME: Must find a better way to deal with slashes
-            regex = '(' + s_root + ')' + r'(.*)'
-            match = re.search(regex, dir_name)
-            if match:
-                subdir = match.group(2)[1:]  # Avoid the leading slash
-                if subdir:
-                    print(u'Making directory %s' %
-                          os.path.join(o_root, subdir))
-                    try:
-                        os.makedirs(os.path.join(o_root, subdir))
-                    except Exception:
-                        sys.exit(u'ERROR: Can not create directory, aborted.')
+            # Create sub directories to preserve the original structure
+            subdir = get_subdir_name(s_root, dir_name)
+            if subdir:
+                print(u'Making directory %s' %
+                      os.path.join(o_root, subdir))
+                try:
+                    os.makedirs(os.path.join(o_root, subdir))
+                except Exception:
+                    sys.exit(u'ERROR: Can not create directory, aborted.')
 
             for f in file_list:
                 if subdir:

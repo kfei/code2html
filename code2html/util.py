@@ -1,18 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import re
 from subprocess import Popen, PIPE
 from os.path import expanduser, isfile, isdir, exists
 import glob
 from shutil import rmtree
 from os import makedirs
-
-
-def strip_trailing_slash(string):
-    if string[-1] == '/':  # FIXME: Does this work for Windows?
-        return string[:-1]
-    else:
-        return string
 
 
 def query_yes_no(question, default="yes"):
@@ -95,3 +89,16 @@ def test_output(output):
             sys.exit(u'Nothing happened.')
 
     makedirs(output)
+
+
+def get_subdir_name(root, dir_name):
+    regex = '(' + root + ')' + '(.+)'
+
+    match = re.search(regex, dir_name)
+    if match:
+        subdir_name = match.group(2)[1:]  # Avoid the leading slash
+        print regex, dir_name + " => subdir_name: %s" % subdir_name
+    else:
+        subdir_name = None
+
+    return subdir_name
