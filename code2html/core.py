@@ -5,29 +5,29 @@ import os
 import re
 from shutil import move
 import subprocess
-from fnmatch import fnmatch
 
 from code2html.vim import get_vimrc, vim_command, clean_vimrc
 from code2html.filter import get_filter
-from code2html.util import get_subdir_name
+from code2html.util import get_subdir_name, included
 
 
 vimrc_file = None
 
 
-def fire(in_out, color):
+def fire(input, output, includes, color):
     """
     Create Vim configs and then fire up the file traveling.
     """
     global vimrc_file
     vimrc_file = get_vimrc(color)
-    traverse_files(in_out)
+    in_out = (input, output)
+    traverse_files(in_out, includes)
 
 
-def traverse_files(in_out):
+def traverse_files(in_out, includes):
     """
     Traverse the source directory, and send each file to
-    convert. Without lost of the directory hierachy.
+    convert. Without lost of the directory structure.
     """
     s_root = in_out[0]
     o_root = in_out[1]
@@ -52,6 +52,8 @@ def traverse_files(in_out):
                     sys.exit(u'ERROR: Can not create directory, aborted.')
 
             for f in file_list:
+                if not included(f, includes):
+                    break  # Only do convert on included files
                 if subdir:
                     convert(dir_name, f, os.path.join(o_root, subdir))
                 else:

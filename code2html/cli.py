@@ -14,6 +14,7 @@ def main():
     args = get_args()
     input = normpath(args.input)
     output = normpath(args.output)
+    includes = args.includes
     color = args.color
 
     # Preparation
@@ -21,10 +22,10 @@ def main():
     util.check_color_scheme(color)
     util.test_input(input)
     util.test_output(output)
+    util.test_includes(includes)
 
     # Call Vim to do the conversion
-    in_out = (input, output)
-    core.fire(in_out, color)
+    core.fire(input, output, includes, color)
 
     sys.exit(0)
 

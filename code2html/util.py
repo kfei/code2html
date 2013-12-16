@@ -7,6 +7,7 @@ from os.path import expanduser, isfile, isdir, exists
 import glob
 from shutil import rmtree
 from os import makedirs
+from fnmatch import fnmatch
 
 
 def query_yes_no(question, default="yes"):
@@ -91,14 +92,29 @@ def test_output(output):
     makedirs(output)
 
 
+def test_includes(includes):
+    """
+    Stop program if there is no include pattern
+    """
+    if includes == []:
+        sys.exit(u'No include pattern specified, aborted.')
+
+
 def get_subdir_name(root, dir_name):
     regex = '(' + root + ')' + '(.+)'
 
     match = re.search(regex, dir_name)
     if match:
         subdir_name = match.group(2)[1:]  # Avoid the leading slash
-        print regex, dir_name + " => subdir_name: %s" % subdir_name
     else:
         subdir_name = None
 
     return subdir_name
+
+
+def included(f, includes):
+    for pattern in includes:
+        if fnmatch(f, pattern):
+            return True
+
+    return False

@@ -1,7 +1,7 @@
 code2html
 ====
 
-Convert source code repository to HTML.
+Convert source code repository to HTML files.
 
 Brief
 -----
@@ -28,12 +28,21 @@ Usage
 -----
 ::
 
-    code2html [-h] [--color COLOR] input output
-    
+    usage: cli.py [-h] [--color COLOR] [--include INCLUDES] input output
+
     positional arguments:
-      input          path to the source code repository
-      output         path for saving output files
-    
+      input               Path to the source code repository
+      output              Path for saving output files
+
     optional arguments:
-      -h, --help     show this help message and exit
-      --color COLOR  the color scheme to use for syntax highlighting
+      -h, --help          show this help message and exit
+      --color COLOR       Specify the color scheme use for syntax highlighting
+      --include INCLUDES  Specify file matching patterns, then only the matched
+                          files will be convert. Wild card characters are
+                          supported. e.g. --include '*.c' --include '?.py'
+
+Example
+~~~~~~~
+
+``code2html --color=jellybeans --include '*.py' --include 'ext.cpp' --include
+'README.rst' /path/to/input /path/to/output``
