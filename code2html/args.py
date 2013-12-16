@@ -18,6 +18,6 @@ def get_args():
                    default=[],
                    help='Specify file matching patterns, then only the matched'
                         ' files will be convert. Wild card characters are '
-                        "supported. e.g. --include '*.c' --include '?.py'")
+                        "supported. e.g. --include='*.c' --include='?.py'")
 
     return p.parse_args()

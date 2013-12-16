@@ -39,10 +39,10 @@ Usage
       --color COLOR       Specify the color scheme use for syntax highlighting
       --include INCLUDES  Specify file matching patterns, then only the matched
                           files will be convert. Wild card characters are
-                          supported. e.g. --include '*.c' --include '?.py'
+                          supported. e.g. --include='*.c' --include='?.py'
 
 Example
 ~~~~~~~
 
-``code2html --color=jellybeans --include '*.py' --include 'ext.cpp' --include
-'README.rst' /path/to/input /path/to/output``
+``code2html --color=jellybeans --include='*.py' --include='README.rst'
+ /path/to/input /path/to/output``
