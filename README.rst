@@ -1,11 +1,9 @@
 code2html
 ====
-
 Convert source code repository to HTML files.
 
 Brief
 -----
-
 Do you like reading source code on your mobile devices?
 
 HTML is a light-weight format (unlike PDF or EPUB) that can be easily readed on
@@ -19,7 +17,6 @@ Get rid of those social networking applications, start to **enjoy code reading**
 
 Requirements
 ------------
-
 By taking advantages of the magic ``TOhtml`` function from ``Vim``,
 ``code2html`` requires you have ``Vim`` installed, also if you specify
 a non-default color scheme to use, it must be available on your system as well.
@@ -43,6 +40,7 @@ Usage
 
 Example
 ~~~~~~~
+::
 
-``code2html --color=jellybeans --include='*.py' --include='README.rst'
- /path/to/input /path/to/output``
+    $ code2html --color=jellybeans --include='*.py' --include='ext.c'
+    --include='README.rst' /path/to/input /path/to/output
