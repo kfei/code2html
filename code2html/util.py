@@ -2,8 +2,9 @@
 
 import sys
 import re
+import platform
 from subprocess import Popen, PIPE
-from os.path import expanduser, isfile, isdir, exists
+from os.path import expanduser, isfile, isdir, exists, normcase, join
 import glob
 from shutil import rmtree
 from os import makedirs
@@ -52,17 +53,26 @@ def check_vim():
     if vim_header:
         pass  # Vim detected
     else:
-        sys.exit(u'ERROR: Vim is not yet installed on this system, aborted.')
+        sys.exit(u'ERROR: Vim is not available on this system '
+                 u'(maybe a PATH issue), aborted.')
 
 
 def check_color_scheme(color):
     """
     Check whether the selected color scheme exists
-    TODO: Add Windows support
     """
-    if isfile(expanduser('~') + '/.vim/colors/' + color + '.vim'):
+    if platform.system() == 'Windows':
+        user_cs_file = normcase(join(expanduser('~'),
+                                     'vimfiles/colors', color + '.vim'))
+        builtin_cs_file = normcase('C:/Program Files*/Vim/vim*/colors/'
+                                   + color + '.vim')
+    else:
+        user_cs_file = expanduser('~') + '/.vim/colors/' + color + '.vim'
+        builtin_cs_file = '/usr/share/vim/vim*/colors/' + color + '.vim'
+
+    if isfile(user_cs_file):
         pass  # Color scheme exists
-    elif glob.glob('/usr/share/vim/vim*/colors/' + color + '.vim'):
+    elif glob.glob(builtin_cs_file):
         pass  # Color scheme exists
     else:
         sys.exit(u'ERROR: The selected color scheme does not exist, aborted.')
