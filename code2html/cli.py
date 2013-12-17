@@ -2,31 +2,24 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from os.path import normpath
 
-from code2html.args import get_args
-from code2html import util
+from code2html.args import Args
+from code2html.util import check_vim
 from code2html import core
 
 
 def main():
-    # Get the arguments passed by user
-    args = get_args()
-    input = normpath(args.input)
-    output = normpath(args.output)
-    includes = args.includes
-    color = args.color
-
     # Preparation
-    util.check_vim()
-    util.check_color_scheme(color)
-    util.check_input(input)
-    util.check_output(output)
-    util.check_includes(includes)
+    check_vim()
+
+    # Get the arguments passed by user
+    args = Args()
+    args.check_args()
 
     # Call Vim to do the conversion
-    core.fire(input, output, includes, color)
+    core.fire(args)
 
+    # Good bye
     sys.exit(0)
 
 

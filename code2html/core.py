@@ -14,14 +14,14 @@ from code2html.util import get_subdir_name, included
 vimrc_file = None
 
 
-def fire(input, output, includes, color):
+def fire(args):
     """
     Create Vim configs and then fire up the file traveling.
     """
     global vimrc_file
-    vimrc_file = get_vimrc(color)
-    in_out = (input, output)
-    traverse_files(in_out, includes)
+    vimrc_file = get_vimrc(args.color)
+    in_out = (args.input, args.output)
+    traverse_files(in_out, args.includes)
 
 
 def traverse_files(in_out, includes):
