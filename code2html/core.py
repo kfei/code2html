@@ -53,7 +53,7 @@ def traverse_files(in_out, includes):
 
             for f in file_list:
                 if not included(f, includes):
-                    break  # Only do convert on included files
+                    continue  # Only do convert on included files
                 if subdir:
                     convert(dir_name, f, os.path.join(o_root, subdir))
                 else:
