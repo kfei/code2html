@@ -78,9 +78,9 @@ def check_color_scheme(color):
         sys.exit(u'ERROR: The selected color scheme does not exist, aborted.')
 
 
-def test_input(source):
+def check_input(source):
     """
-    Test the inupt path
+    Check the inupt path
     """
     if isdir(source):
         pass
@@ -88,9 +88,9 @@ def test_input(source):
         sys.exit(u'ERROR: The source directory does not exist, aborted.')
 
 
-def test_output(output):
+def check_output(output):
     """
-    Test the output path, create it if not exists.
+    Check the output path, create it if not exists.
     """
     if exists(output):
         if query_yes_no(u'The output directory exists,'
@@ -102,7 +102,7 @@ def test_output(output):
     makedirs(output)
 
 
-def test_includes(includes):
+def check_includes(includes):
     """
     Stop program if there is no include pattern
     """

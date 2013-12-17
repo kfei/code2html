@@ -20,9 +20,9 @@ def main():
     # Preparation
     util.check_vim()
     util.check_color_scheme(color)
-    util.test_input(input)
-    util.test_output(output)
-    util.test_includes(includes)
+    util.check_input(input)
+    util.check_output(output)
+    util.check_includes(includes)
 
     # Call Vim to do the conversion
     core.fire(input, output, includes, color)
