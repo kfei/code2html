@@ -128,3 +128,12 @@ def included(f, includes):
             return True
 
     return False
+
+
+def create_subdir(o_root, subdir):
+    print(u'Making directory %s' %
+          join(o_root, subdir))
+    try:
+        makedirs(join(o_root, subdir))
+    except Exception:
+        sys.exit(u'ERROR: Can not create directory, aborted.')

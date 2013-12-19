@@ -8,10 +8,11 @@ import subprocess
 
 from code2html.vim import get_vimrc, vim_command, clean_vimrc
 from code2html.filter import get_filter
-from code2html.util import get_subdir_name, included
+from code2html.util import get_subdir_name, included, create_subdir
 
 
 vimrc_file = None
+pre = False
 
 
 def fire(args):
@@ -20,6 +21,10 @@ def fire(args):
     """
     global vimrc_file
     vimrc_file = get_vimrc(args.color)
+
+    global pre
+    pre = args.pre
+
     in_out = (args.input, args.output)
     traverse_files(in_out, args.includes)
 
@@ -41,15 +46,11 @@ def traverse_files(in_out, includes):
             if match:
                 break
         else:
-            # Create sub directories to preserve the original structure
             subdir = get_subdir_name(s_root, dir_name)
+
             if subdir:
-                print(u'Making directory %s' %
-                      os.path.join(o_root, subdir))
-                try:
-                    os.makedirs(os.path.join(o_root, subdir))
-                except Exception:
-                    sys.exit(u'ERROR: Can not create directory, aborted.')
+                # Create sub directories to preserve the original structure
+                create_subdir(o_root, subdir)
 
             for f in file_list:
                 if not included(f, includes):
@@ -71,14 +72,17 @@ def convert(source_path, file_name, output_path):
     html_file = os.path.join(source_path, file_name + '.html')
     out_file = os.path.join(output_path, file_name + '.html')
 
-    global vimrc_file
-
+    #  Just display, not actually performing the conversion
     print(u'Converting %s into %s' % (ori_file, out_file))
 
-    cmd = vim_command(vimrc_file) + [ori_file]
+    global pre
 
-    try:
-        subprocess.call(cmd)
-        move(html_file, out_file)
-    except Exception:
-        sys.exit(u'ERROR: Fail to convert files, aborted.')
+    if not pre:
+        global vimrc_file
+        cmd = vim_command(vimrc_file) + [ori_file]
+
+        try:
+            subprocess.call(cmd)
+            move(html_file, out_file)
+        except Exception:
+            sys.exit(u'ERROR: Fail to convert files, aborted.')
