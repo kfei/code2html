@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 
-def get_filter():
+def get_ignores():
     """
     Return a list of ignore directories.
     """
 
     # Ignore all directories start with a dot
-    filter = ['/\.\w+/*']
+    ignores = ['/\.\w+/*']
 
-    return filter
+    return ignores

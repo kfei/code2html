@@ -7,7 +7,7 @@ from shutil import move
 import subprocess
 
 from code2html.vim import get_vimrc, vim_command, clean_vimrc
-from code2html.filter import get_filter
+from code2html.ignores import get_ignores
 from code2html.util import get_subdir_name, included, create_subdir
 
 
@@ -37,11 +37,11 @@ def traverse_files(in_out, includes):
     s_root = in_out[0]
     o_root = in_out[1]
 
-    filter = get_filter()  # Apply the ignore list
+    ignores = get_ignores()  # Apply the ignore list
 
     for dir_name, sub_dir_name, file_list in os.walk(s_root):
         # Ignore some sub directories, e.g. source code control
-        for ig in filter:
+        for ig in ignores:
             match = re.search(ig, dir_name, re.IGNORECASE)
             if match:
                 break
