@@ -6,7 +6,7 @@ Brief
 -----
 Do you like reading source code on your mobile devices?
 
-HTML is a light-weight format (unlike PDF or EPUB) that can be easily readed on
+HTML is a light-weight format (unlike PDF or EPUB) that can be easily read on
 every browser-included mobile device.
 
 ``code2html`` is a tool converts source code repository to HTML format files so
@@ -45,7 +45,7 @@ Example 1
 ~~~~~~~~~
 Use ``--pre`` to check what would be converted::
 
-    $ code2html --include='*.cpp' --pre /path/to/input /path/to/output
+    $ code2html --pre --include='*.cpp' /path/to/input /path/to/output
 
 
 Example 2
