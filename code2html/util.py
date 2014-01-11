@@ -47,6 +47,9 @@ def which(program):
     Check if an executable program exists, in a platform-independent way.
     Idea comes from: http://stackoverflow.com/a/377028/2504317
     """
+    if platform.system() == 'Windows':
+        program += '.exe'
+
     def is_exe(fpath):
         return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
 
@@ -144,3 +147,14 @@ def create_subdir(o_root, subdir):
         os.makedirs(join(o_root, subdir))
     except Exception:
         sys.exit(u'ERROR: Can not create directory, aborted.')
+
+
+def get_shell():
+    """
+    For Windows, the shell flag in subprocess.call must be True.
+    FIXME: Find a more general way.
+    """
+    if platform.system() == 'Windows':
+        return True
+    else:
+        return False

@@ -8,7 +8,7 @@ import subprocess
 
 from code2html.vim import get_vimrc, vim_command, clean_vimrc
 from code2html.ignores import get_ignores
-from code2html.util import get_subdir_name, included, create_subdir
+from code2html.util import get_subdir_name, included, create_subdir, get_shell
 
 
 vimrc_file = None
@@ -82,7 +82,7 @@ def convert(source_path, file_name, output_path):
         cmd = vim_command(vimrc_file) + [ori_file]
 
         try:
-            subprocess.call(cmd)
+            subprocess.call(cmd, shell=get_shell())
             move(html_file, out_file)
         except Exception:
             sys.exit(u'ERROR: Fail to convert files, aborted.')
