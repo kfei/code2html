@@ -2,12 +2,11 @@
 
 import sys
 import re
+import os
 import platform
-from subprocess import Popen, PIPE
 from os.path import expanduser, isfile, isdir, exists, normcase, join
 import glob
 from shutil import rmtree
-from os import makedirs
 from fnmatch import fnmatch
 
 
@@ -43,18 +42,26 @@ def query_yes_no(question, default="yes"):
             pass
 
 
-def check_vim():
+def which(program):
     """
-    Check whether Vim is available
+    Check if an executable program exists, in a platform-independent way.
+    Idea comes from: http://stackoverflow.com/a/377028/2504317
     """
-    p1 = Popen(["vim", "--version"], stdout=PIPE)
-    p2 = Popen(["grep", "IMproved"], stdin=p1.stdout, stdout=PIPE)
-    vim_header = p2.communicate()[0].strip('\n')
-    if vim_header:
-        pass  # Vim detected
+    def is_exe(fpath):
+        return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
+
+    fpath, fname = os.path.split(program)
+    if fpath:
+        if is_exe(program):
+            return program
     else:
-        sys.exit(u'ERROR: Vim is not available on this system '
-                 u'(maybe a PATH issue), aborted.')
+        for path in os.environ["PATH"].split(os.pathsep):
+            path = path.strip('"')
+            exe_file = os.path.join(path, program)
+            if is_exe(exe_file):
+                return exe_file
+
+    return None
 
 
 def check_color_scheme(color):
@@ -99,7 +106,7 @@ def check_output(output):
         else:
             sys.exit(u'Nothing happened.')
 
-    makedirs(output)
+    os.makedirs(output)
 
 
 def check_includes(includes):
@@ -134,6 +141,6 @@ def create_subdir(o_root, subdir):
     print(u'Making directory %s' %
           join(o_root, subdir))
     try:
-        makedirs(join(o_root, subdir))
+        os.makedirs(join(o_root, subdir))
     except Exception:
         sys.exit(u'ERROR: Can not create directory, aborted.')

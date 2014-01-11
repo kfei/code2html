@@ -4,13 +4,15 @@
 import sys
 
 from code2html.args import Args
-from code2html.util import check_vim
+from code2html.util import which
 from code2html import core
 
 
 def main():
-    # Preparation
-    check_vim()
+    # Exit if Vim is not available
+    if which('vim') is None:
+        sys.exit(u'ERROR: Vim is not available on this system '
+                 u'(maybe a PATH issue), aborted.')
 
     # Get the arguments passed by user
     args = Args()
