@@ -36,7 +36,7 @@ Usage
       --color COLOR       Specify the color scheme use for syntaxhighlighting
       --include INCLUDES  Specify file matching patterns, then only the matched
                           files will be convert. Wild card characters are
-                          supported. e.g. --include='*.c' --include='?.py'
+                          supported. e.g. --include="*.c" --include="?.py"
       --pre               Instead of actually performing the conversion, simply
                           display what *would* have been converted if --pre
                           weren't used
@@ -45,7 +45,7 @@ Example 1
 ~~~~~~~~~
 Use ``--pre`` to check what would be converted::
 
-    $ code2html --pre --include='*.cpp' /path/to/input /path/to/output
+    $ code2html --pre --include="*.cpp" /path/to/input /path/to/output
 
 
 Example 2
@@ -53,5 +53,5 @@ Example 2
 Convert all Python sources, ``ext.c`` and a README file from ``/path/to/input``
 to ``/path/to/output``, using ``jellybeans`` as the syntax highlight scheme::
 
-    $ code2html --color=jellybeans --include='*.py' --include='ext.c'
-    --include='README.rst' /path/to/input /path/to/output
+    $ code2html --color=jellybeans --include="*.py" --include="ext.c"
+    --include="README.rst" /path/to/input /path/to/output

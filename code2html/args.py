@@ -21,8 +21,8 @@ class Args():
     def get_args(self):
         epilog = ('Example: '
                   'code2html --color=jellybeans '
-                  "--include '*.py' --include 'ext.cpp' "
-                  "--include '*.h'"
+                  '--include="*.py" --include="ext.c" '
+                  '--include="*.h" --include="README.*" '
                   '/path/to/input /path/to/output')
 
         p = argparse.ArgumentParser(epilog=epilog)
@@ -40,7 +40,7 @@ class Args():
                        help='Specify file matching patterns, then only the '
                             'matched files will be convert. Wild card '
                             'characters are supported. '
-                            "e.g. --include='*.c' --include='?.py'")
+                            'e.g. --include="*.c" --include="?.py"')
 
         p.add_argument('--pre', action='store_true', dest='pre',
                        help='Instead of actually performing the conversion, '
