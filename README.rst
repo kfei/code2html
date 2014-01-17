@@ -1,5 +1,5 @@
 code2html
-====
+=========
 Convert source code repository to HTML files.
 
 Brief
@@ -18,7 +18,7 @@ Get rid of those social networking applications, start to **enjoy code reading**
 Requirements
 ------------
 By taking advantages of the magic ``TOhtml`` function from ``Vim``,
-``code2html`` requires you have ``Vim`` installed, also if you specify
+``code2html`` requires you have ``Vim`` installed. Also if you specify
 a non-default color scheme to use, it must be available on your system as well.
 
 Usage
