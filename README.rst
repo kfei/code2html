@@ -33,7 +33,7 @@ Usage
 
     optional arguments:
       -h, --help          show this help message and exit
-      --color COLOR       Specify the color scheme use for syntaxhighlighting
+      --color COLOR       Specify the color scheme use for syntax highlighting
       --include INCLUDES  Specify file matching patterns, then only the matched
                           files will be convert. Wild card characters are
                           supported. e.g. --include="*.c" --include="?.py"

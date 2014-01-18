@@ -32,7 +32,7 @@ class Args():
         p.add_argument('output', help='Path for saving output files')
 
         p.add_argument('--color', default='default',
-                       help='Specify the color scheme use for syntax'
+                       help='Specify the color scheme use for syntax '
                             'highlighting')
 
         p.add_argument('--include', action='append', dest='includes',
