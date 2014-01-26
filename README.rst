@@ -63,13 +63,9 @@ manager to organize them. And then next time you wait for lunch, bus,
 girlfriend (FIXME!), etc., **read some code!**
 
 .. image:: https://raw.githubusercontent.com/kfei/code2html/master/misc/img1.png
-   :height: 240px
 
 .. image:: https://raw.githubusercontent.com/kfei/code2html/master/misc/img2.png
-   :height: 240px
 
 .. image:: https://raw.githubusercontent.com/kfei/code2html/master/misc/img3.png
-   :height: 240px
 
 .. image:: https://raw.githubusercontent.com/kfei/code2html/master/misc/img4.png
-   :height: 240px
