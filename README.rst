@@ -55,3 +55,21 @@ to ``/path/to/output``, using ``jellybeans`` as the syntax highlight scheme::
 
     $ code2html --color=jellybeans --include="*.py" --include="ext.c"
     --include="README.rst" /path/to/input /path/to/output
+
+Example 3
+~~~~~~~~~
+Put the source code files into your mobile devices and find a good file 
+manager to organize them. And then next time you wait for lunch, bus, 
+girlfriend (FIXME!), etc., **read some code!**
+
+.. image:: https://raw.githubusercontent.com/kfei/code2html/master/misc/img1.png
+   :height: 240px
+
+.. image:: https://raw.githubusercontent.com/kfei/code2html/master/misc/img2.png
+   :height: 240px
+
+.. image:: https://raw.githubusercontent.com/kfei/code2html/master/misc/img3.png
+   :height: 240px
+
+.. image:: https://raw.githubusercontent.com/kfei/code2html/master/misc/img4.png
+   :height: 240px
