@@ -14,13 +14,13 @@ if pyversion < (2, 7) or (3, 0) <= pyversion <= (3, 1):
 
 setup(
     name='code2html',
-    description='Convert source code repository to HTML,'
+    description='Convert source code repository to HTML files,'
                 ' with beautiful syntax highlight.',
     packages=find_packages(),
     author='Lin, Ke-fei',
     author_email='kfei@kfei.net',
     version=metadata['version'],
-    url='http://github.com/kfei/code2html',
+    url='https://github.com/kfei/code2html',
     license="MIT",
     keywords="code, syntax, highlight, convert, html",
     long_description=description,
@@ -29,9 +29,7 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Topic :: Utilities',
-        'Operating System :: MacOS :: MacOS X',
-        'Operating System :: POSIX',
-        'Operating System :: Microsoft',
+        'Operating System :: OS Independent',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.3',
